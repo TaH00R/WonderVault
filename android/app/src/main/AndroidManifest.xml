@@ -1,4 +1,33 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Internet -->
+<uses-permission android:name="android.permission.INTERNET" />
+
+<!-- Check network status -->
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+<!-- Current location -->
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+<!-- Camera -->
+<uses-permission android:name="android.permission.CAMERA" />
+
+<!-- Android 13+ notifications -->
+<uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+<!-- Read media (Android 13+) -->
+<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+
+<!-- For Android 12 and below -->
+<uses-permission
+    android:name="android.permission.READ_EXTERNAL_STORAGE"
+    android:maxSdkVersion="32" />
+
+<!-- Optional: Write permission for Android 9 and below -->
+<uses-permission
+    android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    android:maxSdkVersion="28" />
     <application
         android:label="wondervault"
         android:name="${applicationName}"
