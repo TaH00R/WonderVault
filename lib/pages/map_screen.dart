@@ -82,7 +82,7 @@ class _MapScreenState extends State<MapScreen> {
                         height: 40,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Colors.blue.withOpacity(0.25),
+                          color: Colors.blue.withValues(alpha: 0.25),
                         ),
                       ),
 
@@ -125,6 +125,29 @@ class _MapScreenState extends State<MapScreen> {
         onPressed: _getCurrentLocation,
         child: const Icon(Icons.my_location),
       ),
+      appBar: AppBar(
+        title: const Text('WonderVault'),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.person),
+          onPressed: () {
+            // Handle menu button press
+          },
+          
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.photo_library),
+            label: 'Memories',
+          ),
+        ],
+      )
     );
   }
 }
