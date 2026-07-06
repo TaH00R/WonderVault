@@ -1,8 +1,10 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wondervault/utils/colors.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -41,7 +43,7 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       body: FlutterMap(
         options: const MapOptions(
-          cameraConstraint: const CameraConstraint.containLatitude(),
+          cameraConstraint: CameraConstraint.containLatitude(),
           keepAlive: true,
           backgroundColor: Colors.white,
           initialCenter: LatLng(20.5937, 78.9629),
@@ -125,18 +127,46 @@ class _MapScreenState extends State<MapScreen> {
         onPressed: _getCurrentLocation,
         child: const Icon(Icons.my_location),
       ),
-      appBar: AppBar(
-        title: const Text('WonderVault'),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.person),
-          onPressed: () {
-            // Handle menu button press
-          },
-          
-        ),
+     appBar: AppBar(
+  backgroundColor: Colors.transparent,
+  elevation: 0,
+  scrolledUnderElevation: 0,
+
+  flexibleSpace: Container(
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          flame,
+          mint,
+        ],
       ),
+    ),
+  ),
+
+  title: Text(
+    'WonderVault',
+    style: GoogleFonts.bonheurRoyale(
+      fontSize: 40,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+  ),
+
+  centerTitle: true,
+
+  leading: IconButton(
+    icon: const Icon(
+      Icons.person_outline_rounded,
+      color: Colors.white,
+    ),
+    onPressed: () {},
+  ),
+),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color.fromARGB(255, 202, 118, 101),
+        selectedItemColor: Colors.greenAccent,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
