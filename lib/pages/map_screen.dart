@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wondervault/widgets/app_bar.dart';
-import 'package:wondervault/widgets/bottom_nav_bar.dart';
+import 'package:wondervault/utils/helper_functions.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -14,7 +13,6 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  int _selectedIndex = 0;
   final MapController _mapController = MapController();
 
   Position? _currentPosition;
@@ -128,51 +126,9 @@ class _MapScreenState extends State<MapScreen> {
         onPressed: _getCurrentLocation,
         child: const Icon(Icons.my_location),
       ),
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(),
-      ),
-      bottomNavigationBar: WonderBottomNavBar(selectedIndex: _selectedIndex, 
-      onTap: (int index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      })
     );
   }
 
-
 }
 
-Future<Position> determinePosition() async {
-  bool serviceEnabled;
-  LocationPermission permission;
 
-  // Check if location services are enabled
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  if (!serviceEnabled) {
-    throw Exception('Location services are disabled.');
-  }
-
-  // Check permission
-  permission = await Geolocator.checkPermission();
-
-  if (permission == LocationPermission.denied) {
-    permission = await Geolocator.requestPermission();
-
-    if (permission == LocationPermission.denied) {
-      throw Exception('Location permissions are denied.');
-    }
-  }
-
-  if (permission == LocationPermission.deniedForever) {
-    throw Exception(
-      'Location permissions are permanently denied. Please enable them from settings.',
-    );
-  }
-
-  // Get current location
-  return await Geolocator.getCurrentPosition(
-    locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
-  );
-}
